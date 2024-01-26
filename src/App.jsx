@@ -17,7 +17,7 @@ function App() {
   async function testBackendConnection() {
     try {
       const response = await fetch(
-        `https://snippetsilobackend-production.up.railway.app/api/test`
+        `${import.meta.env.VITE_BACKEND_URL}/api/test`
       )
       const data = await response.json()
       console.log("Response from backend:", data)
@@ -26,23 +26,18 @@ function App() {
     }
   }
 
-  testBackendConnection()
+  useEffect(() => {
+    testBackendConnection()
+  }, [])
 
   useEffect(() => {
     const AIRTABLE_API_KEY = import.meta.env.VITE_AIRTABLE_API_KEY
-    // Load data from localStorage or fetch it
-    if (localStorage.getItem("cachedData") !== null) {
-      console.log("cachedData exists, loading now")
-      setData(JSON.parse(localStorage.getItem("cachedData")))
-    } else {
-      console.log("cachedData does not exist, fetching now")
-    }
 
+    // Function to fetch data
     const fetchData = async () => {
-      console.log("cachedData does not exist, fetching now")
-      var base = new Airtable({
-        apiKey: AIRTABLE_API_KEY,
-      }).base("appOOlZ2AISbHpbVb")
+      var base = new Airtable({ apiKey: AIRTABLE_API_KEY }).base(
+        "appOOlZ2AISbHpbVb"
+      )
 
       let allRecords = []
 
@@ -53,15 +48,9 @@ function App() {
         })
         .eachPage(
           function page(records, fetchNextPage) {
-            // This function (`page`) will get called for each page of records.
-
             records.forEach(function (record) {
               allRecords.push(record.fields)
             })
-
-            // To fetch the next page of records, call `fetchNextPage`.
-            // If there are more records, `page` will get called again.
-            // If there are no more records, `done` will get called.
             fetchNextPage()
           },
           function done(err) {
@@ -76,8 +65,13 @@ function App() {
         )
     }
 
+    // Load data from localStorage or fetch it
+    if (localStorage.getItem("cachedData") !== null) {
+      console.log("cachedData exists, loading now")
+      setData(JSON.parse(localStorage.getItem("cachedData")))
+    }
     fetchData()
-  }, []) // Removed data from dependency array
+  }, [])
 
   /* Make sure search works */
   const handleSearchChange = (event) => {
