@@ -39,7 +39,7 @@ const MagicForm = () => {
       Title: data.pageTitle,
       URL: search,
       ImageURL: data.socialImage,
-      Tags: tagGrab(tags) || [],
+      Tags: tags ? tagGrab(tags) : [],
     }
 
     fetch(`${import.meta.env.VITE_BACKEND_URL}/api/addData`, {
@@ -72,6 +72,7 @@ const MagicForm = () => {
       return word.charAt(0).toUpperCase() + word.slice(1) // Capitalize the first letter of each word
     })
     console.log(capitalizedWords)
+    console.log(typeof capitalizedWords)
     return capitalizedWords
   }
 

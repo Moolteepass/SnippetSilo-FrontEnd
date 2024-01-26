@@ -80,20 +80,32 @@ function App() {
 
   /* Filter data */
   const filteredData = data.filter((item) => {
-    // Convert search term to lowercase for case-insensitive comparison
-    const searchTerm = search.toLowerCase()
+    // Split search term into tags and title parts
+    const parts = search
+      .toLowerCase()
+      .split(" ")
+      .filter((part) => part)
+    const tagParts = parts
+      .filter((part) => part.startsWith("."))
+      .map((tag) => tag.substring(1))
+    const titleParts = parts.filter((part) => !part.startsWith("."))
 
     // Check if the search term is in the 'Title' field
     const titleMatch =
-      item.Title && item.Title.toLowerCase().includes(searchTerm)
+      titleParts.length === 0 ||
+      (item.Title &&
+        titleParts.every((part) => item.Title.toLowerCase().includes(part)))
 
     // Check if the search term is in the 'Tags' field (assuming 'Tags' is an array of strings)
     const tagsMatch =
-      item.Tags &&
-      item.Tags.some((tag) => tag.toLowerCase().includes(searchTerm))
+      tagParts.length === 0 ||
+      (item.Tags &&
+        tagParts.every((tag) =>
+          item.Tags.some((itemTag) => itemTag.toLowerCase().includes(tag))
+        ))
 
     // Return true if the item matches the search term in either 'Title' or 'Tags'
-    return titleMatch || tagsMatch
+    return titleMatch && tagsMatch
   })
 
   /* Toggle Modal */
@@ -107,7 +119,7 @@ function App() {
         {/* Search bar */}
         <input
           type="text"
-          placeholder={`(Version 2.3) ${filteredData.length} records`}
+          placeholder={`(Version 4.0) ${filteredData.length} records`}
           value={search}
           onChange={handleSearchChange} // Use the handleSearchChange here
         />
