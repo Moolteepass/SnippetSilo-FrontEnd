@@ -15,15 +15,18 @@ const MagicForm = () => {
 
   const magicSearch = async () => {
     try {
-      const response = await fetch("http://localhost:3001/api/getSocialImage", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          url: search,
-        }),
-      })
+      const response = await fetch(
+        "snippetsilobackend-production.up.railway.app/api/getSocialImage",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            url: search,
+          }),
+        }
+      )
       setData(await response.json())
       console.log("Magic Search Data:", data) // Handle the response
     } catch (error) {
@@ -39,7 +42,7 @@ const MagicForm = () => {
       Tags: data.tags || [],
     }
 
-    fetch("http://localhost:3001/api/addData", {
+    fetch("snippetsilobackend-production.up.railway.app/api/addData", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
