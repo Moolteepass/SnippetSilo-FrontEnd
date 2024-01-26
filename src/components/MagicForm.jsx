@@ -71,8 +71,6 @@ const MagicForm = () => {
     const capitalizedWords = words.map((word) => {
       return word.charAt(0).toUpperCase() + word.slice(1) // Capitalize the first letter of each word
     })
-    console.log(capitalizedWords)
-    console.log(typeof capitalizedWords)
     return capitalizedWords
   }
 
