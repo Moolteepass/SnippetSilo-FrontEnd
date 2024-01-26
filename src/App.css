@@ -124,14 +124,21 @@ body {
 }
 
 /* Magic search */
+.magicSearchAndTagsWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 .magicSearchWrap {
   padding-top: 10px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
-.magicSearchWrap input {
+.magicSearchAndTagsWrap input {
   width: 80%;
+  margin-top: 5px;
   padding-right: 10px;
   padding-left: 10px;
   height: 30px;
