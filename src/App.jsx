@@ -17,7 +17,7 @@ function App() {
   async function testBackendConnection() {
     try {
       const response = await fetch(
-        `snippetsilobackend-production.up.railway.app/api/test`
+        `https://snippetsilobackend-production.up.railway.app/api/test`
       )
       const data = await response.json()
       console.log("Response from backend:", data)

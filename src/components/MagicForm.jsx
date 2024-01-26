@@ -16,7 +16,7 @@ const MagicForm = () => {
   const magicSearch = async () => {
     try {
       const response = await fetch(
-        "snippetsilobackend-production.up.railway.app/api/getSocialImage",
+        "https://snippetsilobackend-production.up.railway.app/api/getSocialImage",
         {
           method: "POST",
           headers: {
@@ -42,7 +42,7 @@ const MagicForm = () => {
       Tags: data.tags || [],
     }
 
-    fetch("snippetsilobackend-production.up.railway.app/api/addData", {
+    fetch("https://snippetsilobackend-production.up.railway.app/api/addData", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
