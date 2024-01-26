@@ -14,6 +14,20 @@ function App() {
   const [search, setSearch] = useState("")
   const [showModal, setShowModal] = useState(false)
 
+  async function testBackendConnection() {
+    try {
+      const response = await fetch(
+        `snippetsilobackend-production.up.railway.app/api/test`
+      )
+      const data = await response.json()
+      console.log("Response from backend:", data)
+    } catch (error) {
+      console.error("Error fetching from backend:", error)
+    }
+  }
+
+  testBackendConnection()
+
   useEffect(() => {
     const AIRTABLE_API_KEY = import.meta.env.VITE_AIRTABLE_API_KEY
     // Load data from localStorage or fetch it
