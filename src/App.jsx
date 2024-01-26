@@ -15,6 +15,8 @@ function App() {
   const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
+    const AIRTABLE_API_KEY = import.meta.env.VITE_AIRTABLE_API_KEY
+    console.log(AIRTABLE_API_KEY)
     // Load data from localStorage or fetch it
     if (localStorage.getItem("cachedData") !== null) {
       console.log("cachedData exists, loading now")
@@ -26,8 +28,7 @@ function App() {
     const fetchData = async () => {
       console.log("cachedData does not exist, fetching now")
       var base = new Airtable({
-        apiKey:
-          "patGrTqLMArSkLwSf.28b21052d73212484e726c2573b482facab396c5f5dc83919af2e484611cc6b4",
+        apiKey: AIRTABLE_API_KEY,
       }).base("appOOlZ2AISbHpbVb")
 
       let allRecords = []
