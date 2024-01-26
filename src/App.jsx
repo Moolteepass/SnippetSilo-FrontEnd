@@ -16,7 +16,6 @@ function App() {
 
   useEffect(() => {
     const AIRTABLE_API_KEY = import.meta.env.VITE_AIRTABLE_API_KEY
-    console.log(AIRTABLE_API_KEY)
     // Load data from localStorage or fetch it
     if (localStorage.getItem("cachedData") !== null) {
       console.log("cachedData exists, loading now")
