@@ -123,7 +123,7 @@ body {
   transform: scale(1.1);
 }
 
-/* Magic search */
+/* Magic Search Form */
 .magicSearchAndTagsWrap {
   display: flex;
   flex-direction: column;
@@ -165,6 +165,36 @@ body {
 
 .magicSearchReturnMessage {
   color: rgb(0, 226, 0);
+}
+
+/* Manual Search Form */
+.manualSearchWrap {
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.manualSearch input {
+  width: 100%;
+  margin-top: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  height: 30px;
+}
+
+.manualSearch button {
+  border: none;
+  color: white;
+  background: none;
+  font-size: 25px;
+  transition: transform 0.15s ease;
+}
+
+.manualSearchPreview {
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
 }
 
 /* Group card styles */
