@@ -72,7 +72,7 @@ body {
 
 .modal {
   position: fixed;
-  top: 20%;
+  top: 10%;
   left: 50%;
   transform: translateX(-50%);
   background-color: #444444;
@@ -191,9 +191,14 @@ body {
   transition: transform 0.15s ease;
 }
 
+.manualSearch button:hover {
+  transform: scale(1.1);
+}
+
 .manualSearchPreview {
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding-top: 10px;
 }
 

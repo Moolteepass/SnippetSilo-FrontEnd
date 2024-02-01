@@ -27,20 +27,23 @@ const ManualForm = () => {
       },
       body: JSON.stringify(dataToSend),
     })
-      .then((response) => {
-        if (response.status === 200) {
-          response.json().then((responseData) => {
-            setReturnMessage(responseData.message) // Assuming responseData.message is your message
-            setTimeout(() => {
-              window.location.reload()
-            }, 1000)
-          })
+      .then(async (response) => {
+        const responseData = await response.json()
+
+        if (response.ok) {
+          setReturnMessage(responseData.message) // Assuming responseData.message is your message
+          setTimeout(() => {
+            window.location.reload()
+          }, 1000)
         } else {
-          setReturnMessage("Something went wrong, try again") // Assuming responseData.message is your error message
+          setReturnMessage(
+            responseData.error ||
+              "Something went wrong, but we couldn't find an eror message"
+          ) // Assuming responseData.message is your error message
         }
       })
       .catch((error) => {
-        setReturnMessage("An error occurred:", error)
+        setReturnMessage("An error occurred: ", error)
       })
   }
 
@@ -77,33 +80,31 @@ const ManualForm = () => {
           onChange={(e) => setTags(e.target.value)}
         />
       </div>
-      <div>
-        <div className="manualSearchPreview">
-          <h1>Preview</h1>
-          <Card
-            data={{
-              Title: title ? title : "The Coolest Title Ever",
-              URL: URL,
-              ImageURL: imageURL
-                ? imageURL
-                : "https://images.unsplash.com/photo-1543083115-638c32cd3d58?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2NpJTIwZml8ZW58MHx8MHx8fDA%3D",
-              Tags: tagGrab(tags) || [],
-            }}
-          />
-          <button className="manualSearchSubmit">
-            <FontAwesomeIcon icon={faPaperPlane} onClick={sendToPush} />
-          </button>
-          <h2
-            className="manualSearchReturnMessage"
-            style={
-              returnMessage === "Data added successfully"
-                ? { color: "rgb(0, 226, 0)" }
-                : { color: "red" }
-            }
-          >
-            {returnMessage}
-          </h2>
-        </div>
+      <div className="manualSearchPreview">
+        <h1>Preview</h1>
+        <Card
+          data={{
+            Title: title ? title : "The Coolest Title Ever",
+            URL: URL,
+            ImageURL: imageURL
+              ? imageURL
+              : "https://images.unsplash.com/photo-1543083115-638c32cd3d58?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2NpJTIwZml8ZW58MHx8MHx8fDA%3D",
+            Tags: tagGrab(tags) || [],
+          }}
+        />
+        <button className="manualSearchSubmit">
+          <FontAwesomeIcon icon={faPaperPlane} onClick={sendToPush} />
+        </button>
+        <h2
+          className="manualSearchReturnMessage"
+          style={
+            returnMessage === "Data added successfully"
+              ? { color: "rgb(0, 226, 0)" }
+              : { color: "red" }
+          }
+        >
+          {returnMessage}
+        </h2>
       </div>
     </div>
   )
