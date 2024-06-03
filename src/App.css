@@ -98,6 +98,7 @@ body {
 
 .modalWrap button:hover {
   transform: scale(1.2);
+  cursor: pointer;
 }
 
 .modalButtons {
@@ -161,6 +162,7 @@ body {
 
 .magicSearch button:hover {
   transform: scale(1.1);
+  cursor: pointer;
 }
 
 .magicSearchReturnMessage {
