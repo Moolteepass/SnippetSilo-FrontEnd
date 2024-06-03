@@ -119,7 +119,7 @@ function App() {
         {/* Search bar */}
         <input
           type="text"
-          placeholder={`(Version 4.1) ${filteredData.length} records`}
+          placeholder={`(Version 4.2) ${filteredData.length} records`}
           value={search}
           onChange={handleSearchChange} // Use the handleSearchChange here
         />

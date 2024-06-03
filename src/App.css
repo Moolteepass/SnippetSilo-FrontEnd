@@ -169,6 +169,10 @@ body {
   color: rgb(0, 226, 0);
 }
 
+.spin-fast {
+  animation: fa-spin 0.5s infinite linear; /* Adjust the value (0.5s) to change the speed */
+}
+
 /* Manual Search Form */
 .manualSearchWrap {
   padding-top: 10px;

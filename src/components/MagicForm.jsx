@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
   faMagnifyingGlass,
   faPaperPlane,
+  faSpinner,
 } from "@fortawesome/free-solid-svg-icons"
 
 import { useState } from "react"
@@ -13,9 +14,11 @@ const MagicForm = () => {
   const [search, setSearch] = useState("")
   const [tags, setTags] = useState("")
   const [returnMessage, setReturnMessage] = useState("")
+  const [loading, setLoading] = useState(false)
 
   const magicSearch = async () => {
     try {
+      setLoading(true)
       const response = await fetch(
         `${import.meta.env.VITE_BACKEND_URL}/api/getSocialImage`,
         {
@@ -29,6 +32,7 @@ const MagicForm = () => {
         }
       )
       setData(await response.json())
+      setLoading(false)
     } catch (error) {
       console.error("Error fetching social image", error)
     }
@@ -85,7 +89,11 @@ const MagicForm = () => {
             onChange={(e) => setSearch(e.target.value)}
           />
           <button className="magicSearch" onClick={magicSearch}>
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
+            {loading ? (
+              <FontAwesomeIcon icon={faSpinner} className="spin-fast" />
+            ) : (
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
+            )}
           </button>
         </div>
         <input
